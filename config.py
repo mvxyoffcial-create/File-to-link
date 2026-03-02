@@ -14,7 +14,7 @@ class Config:
     ADMINS = [int(x) for x in os.environ.get("ADMINS", "").split() if x]
     
     # Channels
-    BIN_CHANNEL = -1003853860662  # Private storage channel
+    BIN_CHANNEL=-1003853860662  # Private storage channel
     FORCE_SUB_CHANNEL_1 = "zerodev2"
     FORCE_SUB_CHANNEL_2 = "mvxyoffcail"
     
