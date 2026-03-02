@@ -104,3 +104,24 @@ async def get_permanent_count():
 
 async def get_temp_count():
     return await files_col.count_documents({"permanent": False})
+
+
+# ─── User Files (paginated) ───────────────────────────────
+async def get_user_files(uploader_id: int, page: int = 0, per_page: int = 10):
+    """Get files uploaded by a user, newest first, paginated."""
+    skip = page * per_page
+    cursor = files_col.find(
+        {"uploader_id": uploader_id}
+    ).sort("created_at", -1).skip(skip).limit(per_page)
+    return await cursor.to_list(length=per_page)
+
+async def get_user_file_count(uploader_id: int) -> int:
+    return await files_col.count_documents({"uploader_id": uploader_id})
+
+async def delete_file_by_hash(file_hash: str, uploader_id: int = None):
+    """Delete a file. If uploader_id given, only delete if it belongs to them."""
+    query = {"hash": file_hash}
+    if uploader_id is not None:
+        query["uploader_id"] = uploader_id
+    result = await files_col.delete_one(query)
+    return result.deleted_count > 0
