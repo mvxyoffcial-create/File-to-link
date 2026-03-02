@@ -48,6 +48,10 @@ async def start_handler(client: Client, message: Message):
     # Get random wallpaper
     img_url = await get_random_wallpaper()
 
+    me = await client.get_me()
+    bot_username = me.username or Config.BOT_USERNAME
+    share_url = f"https://t.me/{bot_username}" if bot_username else "https://t.me/Venuboyy"
+
     buttons = InlineKeyboardMarkup([
         [
             InlineKeyboardButton("📚 Help", callback_data="help"),
@@ -55,7 +59,7 @@ async def start_handler(client: Client, message: Message):
         ],
         [
             InlineKeyboardButton("👨‍💻 Developer", url="https://t.me/Venuboyy"),
-            InlineKeyboardButton("🔗 Share Bot", url=f"https://t.me/share/url?url=https://t.me/{Config.BOT_USERNAME}")
+            InlineKeyboardButton("🔗 Share Bot", url=share_url)
         ]
     ])
 
@@ -98,9 +102,11 @@ async def send_file_links(client: Client, message: Message, file_db_id: str):
 
     file_name = file_doc["file_name"]
     file_size = humanbytes(file_doc["file_size"])
-    dl_url = f"{Config.BASE_URL}/dl/{file_db_id}"
-    watch_url = f"{Config.BASE_URL}/watch/{file_db_id}"
-    share_url = f"https://t.me/{Config.BOT_USERNAME}?start=file_{file_db_id}"
+    base = Config.BASE_URL.rstrip("/") or "http://localhost:8080"
+    dl_url = f"{base}/dl/{file_db_id}"
+    watch_url = f"{base}/watch/{file_db_id}"
+    bot_user = Config.BOT_USERNAME or "FileStreamBot"
+    share_url = f"https://t.me/{bot_user}?start=file_{file_db_id}"
 
     buttons = InlineKeyboardMarkup([
         [
@@ -165,9 +171,11 @@ async def file_handler(client: Client, message: Message):
 
     await processing.delete()
 
-    dl_url = f"{Config.BASE_URL}/dl/{file_db_id}"
-    watch_url = f"{Config.BASE_URL}/watch/{file_db_id}"
-    share_url = f"https://t.me/{Config.BOT_USERNAME}?start=file_{file_db_id}"
+    base = Config.BASE_URL.rstrip("/") or "http://localhost:8080"
+    bot_user = Config.BOT_USERNAME or "FileStreamBot"
+    dl_url = f"{base}/dl/{file_db_id}"
+    watch_url = f"{base}/watch/{file_db_id}"
+    share_url = f"https://t.me/{bot_user}?start=file_{file_db_id}"
 
     buttons = InlineKeyboardMarkup([
         [
@@ -209,8 +217,9 @@ async def info_handler(client: Client, message: Message):
     except Exception:
         pass
 
+    profile_url = f"https://t.me/{user.username}" if user.username else f"https://t.me/{Config.BOT_USERNAME}"
     buttons = InlineKeyboardMarkup([
-        [InlineKeyboardButton("👤 Profile Link", url=f"tg://user?id={user.id}")]
+        [InlineKeyboardButton("👤 Profile Link", url=profile_url)]
     ])
 
     # Send with profile photo if available
