@@ -98,14 +98,16 @@ async def build_files_page(user_id: int, page: int):
     rows    = []
 
     for i, f in enumerate(files):
+        # Skip legacy files saved before the hash system
+        if not f.get("hash"):
+            continue
         n         = start_n + i
         badge     = "🔒" if f.get("permanent") else "⏰"
-        size_str  = humanbytes(f["file_size"])
-        name      = truncate(f["file_name"])
+        size_str  = humanbytes(f.get("file_size", 0))
+        name      = truncate(f.get("file_name", "Unknown"))
         lines.append(f"{n}. {badge} <code>{name}</code>  <i>{size_str}</i>")
-        # Each file gets its own button row
         rows.append([InlineKeyboardButton(
-            f"{n}. {badge} {truncate(f['file_name'], 30)}",
+            f"{n}. {badge} {truncate(f.get('file_name','Unknown'), 30)}",
             callback_data=f"filedetail_{f['hash']}"
         )])
 
