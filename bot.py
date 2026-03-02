@@ -43,6 +43,18 @@ async def main():
     Config.BOT_USERNAME = me.username
     logger.info(f"Bot started as @{me.username}")
 
+    # Validate BIN_CHANNEL
+    try:
+        chat = await app.get_chat(Config.BIN_CHANNEL)
+        logger.info(f"BIN_CHANNEL OK: {chat.title} ({chat.id})")
+    except Exception as e:
+        logger.critical(
+            f"\n\n❌ BIN_CHANNEL ERROR: {e}"
+            f"\n   BIN_CHANNEL = {Config.BIN_CHANNEL}"
+            f"\n   Fix: Make sure the ID starts with -100 and bot is admin."
+            f"\n   Get correct ID: forward any channel message to @userinfobot\n"
+        )
+
     # Start web server
     runner = await start_web_server(app)
     logger.info(f"Web server running at {Config.BASE_URL}")
