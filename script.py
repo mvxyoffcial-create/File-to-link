@@ -12,13 +12,13 @@ class Script:
 
     HELP_TXT = """<b>✨ ʜᴏᴡ ᴛᴏ ɢᴇɴᴇʀᴀᴛᴇ ғɪʟᴇ ʟɪɴᴋ ✨
 1️⃣ sᴇɴᴅ ᴀɴʏ ғɪʟᴇ 📂
-2️⃣ ᴡᴀɪᴛ ғᴏʀ ᴘʀᴏᴄᴇssɪɴɢ ⏳
+2️⃣ ᴄʜᴏᴏꜱᴇ 🔒 Pᴇʀᴍᴀɴᴇɴᴛ ᴏʀ ⏰ 24ʜʀ ʟɪɴᴋ
 3️⃣ ɢᴇᴛ ʏᴏᴜʀ ᴅɪʀᴇᴄᴛ ᴅᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ 🔗
 
 📌 ғᴇᴀᴛᴜʀᴇs:
 ➤ ɪɴsᴛᴀɴᴛ ʟɪɴᴋ ɢᴇɴᴇʀᴀᴛɪᴏɴ ⚡
 ➤ sᴜᴘᴘᴏʀᴛs ᴀʟʟ ғɪʟᴇ ᴛʏᴘᴇs 📁
-➤ ғᴀsᴛ & sᴇᴄᴜʀᴇ 🔒
+➤ ᴘᴇʀᴍᴀɴᴇɴᴛ & 24ʜʀ ʟɪɴᴋs 🔒
 ➤ ᴅɪʀᴇᴄᴛ sʜᴀʀɪɴɢ 🚀
 
 🚀 sᴛᴀʀᴛ ɴᴏᴡ!</b>"""
@@ -31,23 +31,26 @@ class Script:
 ├⍟ Dᴀᴛᴀʙᴀsᴇ : <a href='https://www.mongodb.com/'>ᴍᴏɴɢᴏ ᴅʙ</a>
 ├⍟ Bᴏᴛ Sᴇʀᴠᴇʀ : <a href='https://heroku.com/'>ʜᴇʀᴏᴋᴜ</a>
 ├⍟ Fᴇᴀᴛᴜʀᴇ : ғɪʟᴇ ʟɪɴᴋ ɢᴇɴᴇʀᴀᴛᴏʀ 🔗
-├⍟ Bᴜɪʟᴅ Sᴛᴀᴛᴜs : ᴠ1.0 [ ꜱᴛᴀʙʟᴇ ]
+├⍟ Bᴜɪʟᴅ Sᴛᴀᴛᴜs : ᴠ2.0 [ ꜱᴛᴀʙʟᴇ ]
 ╰───────────────⍟</b>"""
 
-    LINK_TXT = """<b>𝗬𝗼𝘂𝗿 𝗟𝗶𝗻𝗸 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗲𝗱 !</b>
+    # {badge} = 🔒 Pᴇʀᴍᴀɴᴇɴᴛ  OR  ⏰ 24ʜʀ
+    LINK_TXT = """<b>𝗬𝗼𝘂𝗿 𝗟𝗶𝗻𝗸 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗲𝗱 ! {badge}</b>
 
 📂 <b>Fɪʟᴇ ɴᴀᴍᴇ</b> : <code>{file_name}</code>
 
 📦 <b>Fɪʟᴇ ꜱɪᴢᴇ</b> : <code>{file_size}</code>
 
-📥 <b>Dᴏᴡɴʟᴏᴀᴅ</b> : {download_url}
+📥 <b>Dᴏᴡɴʟᴏᴀᴅ</b> :
+<code>{download_url}</code>
 
-🖥 <b>Wᴀᴛᴄʜ</b> : {watch_url}
+🖥 <b>Wᴀᴛᴄʜ</b> :
+<code>{watch_url}</code>
 
-🔗 <b>Sʜᴀʀᴇ</b> : {share_url}
+🔗 <b>Sʜᴀʀᴇ</b> :
+<code>{share_url}</code>
 
-
-⚠️ <b>ʟɪɴᴋ ᴡɪʟʟ ᴇxᴘɪʀᴇ ᴡɪᴛʜɪɴ 𝟤𝟦ʜʀꜱ, ᴜꜱᴇ ᴘʀᴇᴍɪᴜᴍ ᴄʀᴇᴅɪᴛꜱ ᴛᴏ ɢᴇᴛ ᴘᴇʀᴍᴀɴᴇɴᴛ ʟɪɴᴋꜱ!! 😊</b>"""
+{expiry_note}"""
 
     FORCE_SUB_TXT = """<b>⚠️ ʏᴏᴜ ɴᴇᴇᴅ ᴛᴏ ᴊᴏɪɴ ᴏᴜʀ ᴄʜᴀɴɴᴇʟs ᴛᴏ ᴜꜱᴇ ᴛʜɪꜱ ʙᴏᴛ!</b>
 
@@ -63,10 +66,19 @@ class Script:
     STATS_TXT = """<b>📊 Bᴏᴛ Sᴛᴀᴛɪsᴛɪᴄs</b>
 
 👥 <b>Tᴏᴛᴀʟ Usᴇʀs:</b> <code>{users}</code>
-📁 <b>Tᴏᴛᴀʟ Fɪʟᴇs:</b> <code>{files}</code>"""
+📁 <b>Tᴏᴛᴀʟ Fɪʟᴇs:</b> <code>{files}</code>
+🔒 <b>Pᴇʀᴍᴀɴᴇɴᴛ:</b> <code>{permanent}</code>
+⏰ <b>Tᴇᴍᴘ (24ʜ):</b> <code>{temp}</code>"""
 
     BROADCAST_TXT = """<b>📢 Bʀᴏᴀᴅᴄᴀsᴛ Fɪɴɪsʜᴇᴅ!</b>
 
 ✅ Sᴜᴄᴄᴇss: <code>{success}</code>
 ❌ Fᴀɪʟᴇᴅ: <code>{failed}</code>
 👥 Tᴏᴛᴀʟ: <code>{total}</code>"""
+
+    CHOOSE_LINK_TYPE = """<b>📂 Fɪʟᴇ ʀᴇᴄᴇɪᴠᴇᴅ!</b>
+
+<b>ᴄʜᴏᴏꜱᴇ ʟɪɴᴋ ᴛʏᴘᴇ:</b>
+
+🔒 <b>Pᴇʀᴍᴀɴᴇɴᴛ</b> — ʟɪɴᴋ ɴᴇᴠᴇʀ ᴇxᴘɪʀᴇs
+⏰ <b>24ʜʀ</b> — ʟɪɴᴋ ᴇxᴘɪʀᴇs ᴀғᴛᴇʀ 24 ʜᴏᴜʀs"""
